@@ -13,14 +13,14 @@ Util.inherits = function (subClass, superClass) {
 };
 
 Util.randomVec = function (length) {
-  var dir = Util.unitVector([Util.randomGen(length, .5),
-            Util.randomGen(length, .5)]);
+  var dir = Util.unitVector([Util.randomGen(1, .5),
+            Util.randomGen(1, .5)]);
   return [dir[0] * length, dir[1] * length]
 };
 
 Util.randomGen = function (max, scale) {
   var scale = scale || 0
-  return Math.floor((Math.random() - scale) * max);
+  return (Math.random() - scale) * max;
 };
 
 Util.randomColor = function () {
@@ -33,8 +33,8 @@ Util.distanceBetween = function (pos1, pos2) {
 
 Util.unitVector = function (vector) {
   // Direction defaults to 0 if absolute value is undefined
-  var yDir = vector[0] / Math.abs(vector[0]) || 0
-  var xDir = vector[1] / Math.abs(vector[1]) || 0
+  var yDir = (vector[0] / Math.abs(vector[0])) || 0
+  var xDir = (vector[1] / Math.abs(vector[1])) || 0
   var squaredLength = (vector[0] * vector[0]) + (vector[1] * vector[1]);
   return [ yDir * ((vector[0] * vector[0]) / squaredLength), xDir * ((vector[1] * vector[1]) / squaredLength)];
 }
