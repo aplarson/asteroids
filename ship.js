@@ -10,6 +10,7 @@
                                         radius: Asteroids.Ship.RADIUS,
                                         color: Asteroids.Util.randomColor(),
                                         game: game })
+    this.heading = Math.atan2(0, 1);
   };
 
   Asteroids.Util.inherits(Asteroids.Ship, Asteroids.MovingObject);
@@ -21,27 +22,32 @@
     this.vel = [0, 0]
   };
 
-  Ship.prototype.power = function(impulse) {
+  Ship.prototype.power = function (direction) {
+    var impulse = [direction * (-Math.cos(this.heading)), direction * Math.sin(this.heading)];
     this.vel[0] += impulse[0];
     this.vel[1] += impulse[1];
   };
 
-  Ship.prototype.draw = function (ctx) {
+  Ship.prototype.turn = function (direction) {
+    this.heading += direction;
+  };
 
-    if (this.vel[0] !== 0 || this.vel[1] !== 0) {
-      ctx.rotate(Math.atan2(this.vel[0], this.vel[1]))
-    }
+  Ship.prototype.draw = function (ctx) {
+    ctx.save();
+    ctx.translate(this.pos[1], this.pos[0]);
+    ctx.rotate(this.heading);
     ctx.beginPath();
-    ctx.moveTo(this.pos[1], this.pos[0] - .5 * this.radius);
-    ctx.lineTo(this.pos[1] + 5, this.pos[0] + .5 * this.radius);
-    ctx.lineTo(this.pos[1] - 5, this.pos[0] + .5 * this.radius);
+    ctx.moveTo(0, -1.5 * this.radius);
+    ctx.lineTo(15, 1.5 * this.radius);
+    ctx.lineTo(-15, 1.5 * this.radius);
     ctx.closePath();
     ctx.fill();
+    ctx.restore();
   };
 
   Ship.prototype.fireBullet = function() {
-    var direction = Asteroids.Util.unitVector(this.vel)
-    var bulletVel = [this.vel[0] + (direction[0] * 15), this.vel[1] + (direction[1] * 15)];
+    var direction = [-Math.cos(this.heading), Math.sin(this.heading)];
+    var bulletVel = [direction[0] * 15, (direction[1] * 15)];
     var bullet = new Asteroids.Bullet(this.pos, this.game, bulletVel);
     this.game.bullets.push(bullet);
   }

@@ -21,10 +21,10 @@ GameView.prototype.start = function () {
 };
 
 GameView.prototype.bindKeyHandlers = function (ship) {
-  window.key('up, w', function() { ship.power([-1, 0]); });
-  window.key('down, s', function() { ship.power([1, 0]); });
-  window.key('left, a', function() { ship.power([0, -1]); });
-  window.key('right, d',function() { ship.power([0, 1]); });
+  window.key('up, w', function() { ship.power(1); });
+  window.key('down, s', function() { ship.power(-1); });
+  window.key('left, a', function() { ship.turn(-.3); });
+  window.key('right, d', function() { ship.turn(.3); });
   window.key('space', function () { ship.fireBullet(); });
 }
 
