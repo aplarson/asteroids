@@ -27,13 +27,15 @@
   };
 
   Ship.prototype.draw = function (ctx) {
+
+    if (this.vel[0] !== 0 || this.vel[1] !== 0) {
+      ctx.rotate(Math.atan2(this.vel[0], this.vel[1]))
+    }
     ctx.beginPath();
     ctx.moveTo(this.pos[1], this.pos[0] - .5 * this.radius);
     ctx.lineTo(this.pos[1] + 5, this.pos[0] + .5 * this.radius);
     ctx.lineTo(this.pos[1] - 5, this.pos[0] + .5 * this.radius);
     ctx.closePath();
-    // ctx.arc(this.pos[1], this.pos[0], this.radius, 0, 2 * Math.PI);
-    // ctx.fillStyle = Asteroids.Util.randomColor();
     ctx.fill();
   };
 
