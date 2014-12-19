@@ -10,15 +10,20 @@ var Game = Asteroids.Game = function () {
   this.bullets = [];
 };
 
-Game.DIM_X = window.innerWidth;
+Game.DIM_X = 1000;
 
-Game.DIM_Y = window.innerHeight;
+Game.DIM_Y = 500;
 
 Game.NUM_ASTEROIDS = 10;
 
 Game.prototype.addAsteroids = function () {
   for(var i = this.asteroids.length; i < Game.NUM_ASTEROIDS; i++) {
-    this.asteroids.push(new Asteroids.Asteroid(Game.randomPosition(), this));
+    var pos = Game.randomPosition();
+    var y = pos[0] - this.ship.pos[0];
+    var x = pos[1] - this.ship.pos[1];
+    if ((y * y + x * x) > 1000) {
+      this.asteroids.push(new Asteroids.Asteroid(pos, this));
+    }
   }
 };
 
