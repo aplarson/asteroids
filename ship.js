@@ -9,23 +9,22 @@
                                         vel: [0, 0],
                                         radius: Asteroids.Ship.RADIUS,
                                         color: Asteroids.Util.randomColor(),
-                                        game: game })
+                                        game: game });
     this.heading = Math.atan2(0, 1);
   };
 
   Asteroids.Util.inherits(Asteroids.Ship, Asteroids.MovingObject);
 
-  Ship.RADIUS = 20
+  Ship.RADIUS = 10;
 
   Ship.prototype.relocate = function () {
     this.pos = Asteroids.Game.randomPosition();
-    this.vel = [0, 0]
+    this.vel = [0, 0];
   };
 
   Ship.prototype.power = function (direction) {
-    var impulse = [direction * (-Math.cos(this.heading)), direction * Math.sin(this.heading)];
-    this.vel[0] += impulse[0];
-    this.vel[1] += impulse[1];
+    this.vel[0] += direction * (-Math.cos(this.heading));
+    this.vel[1] += direction * Math.sin(this.heading);
   };
 
   Ship.prototype.turn = function (direction) {
