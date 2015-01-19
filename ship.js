@@ -44,7 +44,7 @@
     ctx.restore();
   };
 
-  Ship.prototype.fireBullet = function() {
+  Ship.prototype.fireBullet = function () {
     var direction = [-Math.cos(this.heading), Math.sin(this.heading)];
     var bulletVel = [direction[0] * 15, (direction[1] * 15)];
     var bullet = new Asteroids.Bullet(this.pos, this.game, bulletVel);

@@ -6,7 +6,7 @@
 
   var Asteroid = Asteroids.Asteroid = function (pos, game) {
     Asteroids.MovingObject.call(this, { pos: pos,
-                                        vel: Asteroids.Util.randomVec(3),
+                                        vel: Asteroids.Util.randomVec(1),
                                         radius: Asteroid.RADIUS,
                                         color: Asteroids.Util.randomColor(),
                                         game: game })

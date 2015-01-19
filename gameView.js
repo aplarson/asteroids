@@ -13,7 +13,7 @@ GameView.prototype.start = function () {
   var gameView = this;
   var ship = this.game.ship;
   gameView.bindKeyHandlers(ship);
-  setInterval(function(){
+  setInterval(function () {
     gameView.game.addAsteroids();
     gameView.game.step();
     gameView.game.draw(gameView.ctx);
