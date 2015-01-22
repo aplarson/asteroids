@@ -23,6 +23,9 @@
       game = this.game;
       game.remove(this);
       game.remove(otherObject);
+    } else if (otherObject instanceof Asteroids.Asteroid) {
+      var collisionDir = [this.pos[0] - otherObject.pos[0],
+                          this.pos[1] - otherObject.pos[1]];
     }
   };
 })();
